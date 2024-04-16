@@ -1,5 +1,5 @@
 import 'package:appprinter/image_utils.dart';
-import 'package:esc_pos_utils/esc_pos_utils.dart';
+import 'package:esc_pos_utils/esc_pos_utils.dart' as esc;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bluetooth_printer/flutter_bluetooth_printer.dart';
@@ -18,7 +18,7 @@ class MyWidget extends StatelessWidget {
                 return ListTile(
                     title: Text(device.name ?? 'No Name'),
                     subtitle: Text(device.address),
-                    onTap: ()async {
+                    onTap: () async {
                       await print(device);
                     });
               });
@@ -26,11 +26,11 @@ class MyWidget extends StatelessWidget {
   }
 
   Future<void> print(BluetoothDevice divice) async {
-    final ByteData data = await rootBundle.load('assets/logo.png');
+    final ByteData data = await rootBundle.load('assets/images/image.png');
     var imagePrint = ImageUtils.splitImage(Uint8List.view(data.buffer));
     if (imagePrint != null) {
-      CapabilityProfile profile = await CapabilityProfile.load();
-      Generator generator = Generator(PaperSize.mm58, profile);
+      esc.CapabilityProfile profile = await esc.CapabilityProfile.load();
+      esc.Generator generator = esc.Generator(esc.PaperSize.mm58, profile);
       List<int> bytes = [];
       int space = 12;
       if (imagePrint.length > space) {

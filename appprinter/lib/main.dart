@@ -1,6 +1,8 @@
 import 'package:appprinter/print_screent.dart';
 import 'package:flutter/material.dart';
 
+import 'receipt_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  MyWidget(),
+      home: ReceiptPage(),
     );
   }
 }
